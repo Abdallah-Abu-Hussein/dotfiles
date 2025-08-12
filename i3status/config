@@ -1,0 +1,84 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+        colors = true
+        interval = 5
+	markup = "pango"
+        color_good = "#89b4fa" # Light green
+        color_degraded = "#cdd6f4" # Light yellow
+        color_bad = "#ff7770" # Light red
+        output_format = i3bar
+}
+
+# order += "ipv6"
+order += "volume master"
+#order += "ethernet _first_"
+#order += "battery all"
+#order += "disk /"
+#order += "load"
+order +="cpu_usage"
+order += "memory"
+order += "tztime local"
+order += "wireless _first_"
+ 
+
+ wireless _first_ {
+         format_up = "(%quality at %essid)"
+         format_down = "down"
+ }
+
+wireless _first_ {
+        format_up = "<span color='#bf616a'>    %essid  %quality</span>"
+        format_down = "     Down  "
+}
+
+volume master {
+        format = "<span color='#8fbcbb'>󰕾 %volume </span> "
+        format_muted = "󰖁 %volume  "
+        device = "default"
+        mixer = "Master"
+        mixer_idx = 0
+}
+
+ethernet _first_ {
+        format_up = "E: %ip (%speed)"
+        format_down = "E: down"
+}
+
+# battery all {
+#         format = "%status %percentage"
+# }
+
+battery 0 {
+        format = "<span color='#a3be8c'>%status %percentage</span>"
+        hide_seconds = true
+        integer_battery_capacity = true
+        last_full_capacity = true
+        status_chr = "  +"
+        status_bat = " "
+        status_full = " "
+}
+
+disk "/" {
+        format = "%avail"
+}
+
+cpu_usage {
+        format = "<span color='#ebcb8b'>   CPU: %usage</span>"
+}
+
+memory {
+        format = "<span color='#b48ead'>   Mem %used</span>"
+        threshold_degraded = "1G"
+        format_degraded = "MEMORY < %available"
+}
+
+tztime local {
+        format = "<span color='#d08770'>  %a %d-%m-%Y</span> <span color='#5e81ac'> 󰥔  %I:%M</span>"
+}
